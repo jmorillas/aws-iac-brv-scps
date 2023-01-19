@@ -53,19 +53,19 @@ provider "aws" {
 
 
 module "SCP-L2-RegionRestriction" {
-  source = "github.com/jmorillas/scps/modules/SC/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L2-RegionRestriction"
 }
 module "SCP-L2-ApprovedServices" {
-  source = "github.com/jmorillas/scps/modules/SC/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L2-ApprovedServices"
 }
 module "SCP-L1-RootAccessRestriction" {
-  source = "github.com/jmorillas/scps/modules/SC/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L1-RootAccessRestriction"
 }
 module "SCP-L1-CTandOrgProtection" {
-  source = "github.com/jmorillas/scps/modules/SC/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L1-CTandOrgProtection"
 }
 
@@ -77,22 +77,22 @@ module "SCP-L1-CTandOrgProtection" {
 
 
 module "attach_SCP-L2-RegionRestriction"{
-  source = "github.com/jmorillas/scps/modules/OPA/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L2-RegionRestriction.aws_organizations_policy-id
   target_id = var.target_id
 }
 module "attach_SCP-L2-ApprovedServices"{
-  source = "github.com/jmorillas/scps/modules/OPA/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L2-ApprovedServices.aws_organizations_policy-id
   target_id = var.target_id
 }
 module "attach_SCP-L1-RootAccessRestriction"{
-  source = "github.com/jmorillas/scps/modules/OPA/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L1-RootAccessRestriction.aws_organizations_policy-id
   target_id = var.target_id
 }
 module "attach_SCP-L1-CTandOrgProtection"{
-  source = "github.com/jmorillas/scps/modules/OPA/"
+  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L1-CTandOrgProtection.aws_organizations_policy-id
   target_id = var.target_id
 }
