@@ -1,30 +1,3 @@
-##################################################################
-# 888888b.                                                      ##
-# 888  "88b                                                     ##
-# 888  .88P                                                     ##
-# 8888888K.  888d888 8888b.  888  888 888  888 888d888 8888b.   ##
-# 888  "Y88b 888P"      "88b 888  888 888  888 888P"      "88b  ##
-# 888    888 888    .d888888 Y88  88P 888  888 888    .d888888  ##
-# 888   d88P 888    888  888  Y8bd8P  Y88b 888 888    888  888  ##
-# 8888888P"  888    "Y888888   Y88P    "Y88888 888    "Y888888  ##
-##################################################################
-
-#              8888888           .d8888b.                       ##
-#                888            d88P  Y88b                      ##
-#                888            888    888                      ##
-#                888    8888b.  888                             ##
-#                888       "88b 888                             ##
-#                888   .d888888 888    888                      ##
-#                888   888  888 Y88b  d88P                      ##
-#              8888888 "Y888888  "Y8888P"                       ##
-##################################################################
-##      Code INDEX (Please update required)                   ####
-# 1. Set Terraform Backend configuration                      ####
-# 2. Set Terraform Provider                                   ####
-# 3. AWS Organization SCPs Creation (Data imported remotely)  ####
-# 4. AWS Organization SCPs Attachment                         ####
-#                                                             ####
-##################################################################
 
 ##################################################
 # Set terraform backend remotely                ##
@@ -53,19 +26,19 @@ provider "aws" {
 
 
 module "SCP-L2-RegionRestriction" {
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L2-RegionRestriction"
 }
 module "SCP-L2-ApprovedServices" {
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L2-ApprovedServices"
 }
 module "SCP-L1-RootAccessRestriction" {
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L1-RootAccessRestriction"
 }
 module "SCP-L1-CTandOrgProtection" {
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/SC/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L1-CTandOrgProtection"
 }
 
@@ -77,22 +50,22 @@ module "SCP-L1-CTandOrgProtection" {
 
 
 module "attach_SCP-L2-RegionRestriction"{
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L2-RegionRestriction.aws_organizations_policy-id
   target_id = var.target_id
 }
 module "attach_SCP-L2-ApprovedServices"{
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L2-ApprovedServices.aws_organizations_policy-id
   target_id = var.target_id
 }
 module "attach_SCP-L1-RootAccessRestriction"{
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L1-RootAccessRestriction.aws_organizations_policy-id
   target_id = var.target_id
 }
 module "attach_SCP-L1-CTandOrgProtection"{
-  source = "gitlab.com/bravura/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
+  source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/OPA/"
   policy_id = module.SCP-L1-CTandOrgProtection.aws_organizations_policy-id
   target_id = var.target_id
 }
