@@ -28,18 +28,23 @@ provider "aws" {
 module "SCP-L2-RegionRestriction" {
   source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L2-RegionRestriction"
+  target_id = var.target_id
+  
 }
 module "SCP-L2-ApprovedServices" {
   source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L2-ApprovedServices"
+  target_id = var.target_id
 }
 module "SCP-L1-RootAccessRestriction" {
   source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L1-RootAccessRestriction"
+  target_id = var.target_id
 }
 module "SCP-L1-CTandOrgProtection" {
   source = "gitlab.com/brv/shared/terraform/aws/terraform-aws-scp/modules/SC/"
   scp_name      = "SCP-L1-CTandOrgProtection"
+  target_id = var.target_id
 }
 
 
